@@ -1,6 +1,8 @@
 from tkinter import *
 import mysql.connector
 from mysql.connector import Error
+from chatarea import chatroom
+
 global main_windows
 global database 
 database = "chatbox"
@@ -10,7 +12,7 @@ a_icon = PhotoImage(file="./icons/icon.png")
 main_windows.iconphoto(False,a_icon)
 windows_width = 1000
 windows_height = 500
-main_windows.resizable =(False,False)
+main_windows.resizable =(0,0)
 main_windows.geometry("%dx%d"%(windows_width,windows_height))
 frame = Frame(main_windows,height=windows_height, width=windows_width, bg="white")
 frame.pack()
@@ -164,7 +166,8 @@ def login(*args):
         cursor.execute(f'select * from user where username="{username}" and pass1 = "{password}";')
         record = cursor.fetchall()
         if (record):
-            print('[ + ] welcome',username)
+            clear_frame()
+            chatroom(frame)
         else:
             print('[ + ]Cannot find the account',username)
 
@@ -172,7 +175,9 @@ def login(*args):
     except Error as e:
         print("[ + ] got error while finding database:",e)
 
-    
+def clear_frame():
+    for widgets in frame.winfo_children():
+      widgets.destroy()
 
 
 main_menu(frame)
