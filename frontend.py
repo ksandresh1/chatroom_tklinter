@@ -90,6 +90,7 @@ def create_new_account(*args):
         cursor.execute(f"use {database}")
         cursor.execute("show tables;")
         for i in cursor:
+            print(i)
             tables.extend(i)
         if table_name not in tables:
             try:
@@ -167,7 +168,7 @@ def login(*args):
         record = cursor.fetchall()
         if (record):
             clear_frame()
-            chatroom(frame)
+            chatroom(frame,username)
         else:
             print('[ + ]Cannot find the account',username)
 

@@ -2,7 +2,7 @@ import threading
 import socket
 
 host = socket.gethostbyname(socket.gethostname())
-port = 6968
+port = 6969
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((host,port))
